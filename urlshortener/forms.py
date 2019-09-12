@@ -2,7 +2,7 @@ from django import forms
 from .models import Url
 
 
-class UrlshortenerForm(forms.Form):
+class UrlshortenerForm(forms.ModelForm):
     url = forms.URLField()
 
     class Meta:
