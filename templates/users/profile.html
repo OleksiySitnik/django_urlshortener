@@ -8,11 +8,11 @@
         {% for url in profile.urls.all %}
             <a href="{{ url.url }}" class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{ url.url }}</h5>
+                    <h5 class="mb-1">{{ url.url|slice:"0:60" }}...</h5>
                     <small class="text-muted">{{ url.date_submited }}</small>
                 </div>
                 <small class="text-muted">http://127.0.0.1:8000/{{ url.short_url }}</small>
             </a>
-            </div>
         {% endfor %}
+    </div>
 {% endblock %}

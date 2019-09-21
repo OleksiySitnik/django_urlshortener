@@ -4,8 +4,30 @@
 {% block title %}
     Shortener
 {% endblock title %}
-
 {% block content %}
+    <script type="text/javascript">
+        $(function () {
+            $("#submitButton").click(function () {
+                let form = $('#formId').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'ajax_shortener' %}",
+                    data: form,
+                    success: function (data) {
+                        if (data) {
+                            $("h5").text('http://127.0.0.1:8000/' + data.short_url);
+                            $("small").text($('#id_url').val());
+                            $('#url-result').attr("href", data.short_url);
+                            $('#id_url').val('');
+                        }
+                    },
+                    dataType: 'json'
+                });
+            });
+        });
+
+    </script>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-9">
@@ -18,12 +40,22 @@
                                 {{ form|crispy }}
                             </fieldset>
                             <div class="form-group">
-                                <button class="btn btn-outline-primary" type="submit">Shorten</button>
+                                <button id="submitButton" class="btn btn-outline-primary" type="button">Shorten</button>
                             </div>
+                            <a href="#" id="url-result"
+                               class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1"></h5>
+                                </div>
+                                <small class="text-muted"></small>
+                            </a>
                         </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-{% endblock content %}
+
+
+{% endblock %}
