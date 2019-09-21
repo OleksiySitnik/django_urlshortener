@@ -7,8 +7,6 @@ CHARS = ascii_letters + digits
 def generate_key(alphabet=CHARS):
     last_id = len(Url.objects.all()) + 1
 
-    print(last_id)
-
     length = len(alphabet)
     result = ''
 

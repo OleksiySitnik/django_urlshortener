@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'urlshortener.apps.UrlshortenerConfig',
     'users.apps.UsersConfig',
+
     'crispy_forms',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -106,8 +109,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/profile/'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'profile'
 
 
 # Internationalization

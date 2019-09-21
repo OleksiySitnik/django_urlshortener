@@ -13,17 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, re_path, include
+from django.urls import path
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import logout_then_login
 
-from urlshortener import views as urlsh_views
+from users import views as user_views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('users/',include('users.urls')),
-    path('', urlsh_views.shortener_page, name='shortener'),
-    path('short/', urlsh_views.shortener_post, name='ajax_shortener'),
-    re_path('(?P<short_url>[a-zA-Z0-9_-]+)/', urlsh_views.shortener_redirect, name='shortener_redirect' )
-    # path('',urlsh_views.URLShortenerView.as_view(), name='shortener')
+    path('profile/', user_views.profile, name='profile'),
+    path('register/', user_views.register, name='register'),
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('logout/', logout_then_login, name='logout')
 ]
