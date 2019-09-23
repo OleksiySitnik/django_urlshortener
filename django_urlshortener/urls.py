@@ -15,15 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
+from rest_framework import routers
 
 from urlshortener import views as urlsh_views
+from users import views as user_views
 
+router = routers.DefaultRouter()
+router.register('profiles', user_views.ProfileView)
+router.register('urls', urlsh_views.UrlView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/',include('users.urls')),
     path('', urlsh_views.shortener_page, name='shortener'),
     path('short/', urlsh_views.shortener_post, name='ajax_shortener'),
-    re_path('(?P<short_url>[a-zA-Z0-9_-]+)/', urlsh_views.shortener_redirect, name='shortener_redirect' )
-    # path('',urlsh_views.URLShortenerView.as_view(), name='shortener')
+    path('rest-api/',include(router.urls)),
+    re_path('(?P<short_url>[a-zA-Z0-9_-]+)/', urlsh_views.shortener_redirect, name='shortener_redirect' ),
 ]

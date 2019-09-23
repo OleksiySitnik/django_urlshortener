@@ -3,7 +3,7 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <h2>{{ user.username }}</h2>
+    <h2>{{ profile }}</h2>
     <div class="list-group">
         {% for url in profile.urls.all %}
             <a href="{{ url.url }}" class="list-group-item list-group-item-action flex-column align-items-start">

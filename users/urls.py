@@ -16,8 +16,7 @@ Including another URLconf
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import logout_then_login
-
-from users import views as user_views
+from . import views as user_views
 
 
 urlpatterns = [

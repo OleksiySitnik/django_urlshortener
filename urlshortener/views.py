@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.shortcuts import redirect
+from rest_framework import viewsets
 
-
+from .serializers import UrlSerializer
 from .forms import UrlshortenerForm
 from .utils import generate_key
 from users.models import Profile
@@ -38,3 +39,7 @@ def shortener_post(request):
 def shortener_redirect(request, short_url):
     url = Url.objects.get(short_url=short_url)
     return redirect(url)
+
+class UrlView(viewsets.ModelViewSet):
+    queryset = Url.objects.all()
+    serializer_class = UrlSerializer

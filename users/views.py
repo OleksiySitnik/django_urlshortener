@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from rest_framework import viewsets
+
+from .serializers import ProfileSerializer, UserSerializer
 from .forms import UserRegisterForm
 from .models import Profile
 
@@ -26,3 +30,6 @@ def profile(request):
 
     return render(request, 'users/profile.html', context)
 
+class ProfileView(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer

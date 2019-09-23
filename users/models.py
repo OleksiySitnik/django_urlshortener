@@ -8,6 +8,9 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     urls = models.ManyToManyField(Url)
 
+    def __str__(self):
+        return self.user.username
+
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
